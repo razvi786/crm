@@ -20,19 +20,11 @@ public class UserController {
 	@Autowired 
 	private UserService userservice;
 	
-	@GetMapping("hello")
-	public String test() {
-		return "Hello";
-	}
-	
 	@PostMapping("addUser")
 	public User saveUser(@RequestBody User user) {
 		return userservice.addUser(user);
 	}
-//	public User addUser(@RequestBody User user)
-//	{
-//		return userservice.addUser(user);
-//	}
+	
 	@GetMapping("getUserById/{userId}")
 	public Optional<User> getUserById(@PathVariable("userId") int uid)
 	{
