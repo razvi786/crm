@@ -15,7 +15,7 @@ import lombok.Setter;
 //@Setter
 //@NoArgsConstructor
 //@AllArgsConstructor
-//@Entity
+@Entity
 //@Table(name="user")
 public class User {
 	@Id
