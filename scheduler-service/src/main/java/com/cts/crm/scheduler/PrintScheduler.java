@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PrintScheduler {
 
-	@Scheduled(fixedRate = 100000)
+	@Scheduled(fixedRate = 60000)
 	public void printConsole() {
 		LocalTime time=LocalTime.now();
 		System.out.println("Scheduler Triggered at Time: "+time);
 	}
+	
 }

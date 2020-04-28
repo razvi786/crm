@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cts.crm.model.User;
+import com.cts.crm.model.Customer;
 import com.cts.crm.service.proxy.DataServiceProxy;
 
 @RestController
-public class UserRestController {
+public class CustomerRestController {
 	
-	@Autowired 
-	private DataServiceProxy userServiceProxy;
+	@Autowired
+	DataServiceProxy dataServiceProxy;
 	
-	@PostMapping("create-user")
-	public User createUser(@RequestBody User user) {
-		return userServiceProxy.createUser(user);
+	@PostMapping("create-customer")
+	public Customer createCustomer(@RequestBody Customer customer) {
+		return dataServiceProxy.createCustomer(customer);
 	}
 	
-	@GetMapping("get-user/{email}/{password}")
-	public User getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
-		return userServiceProxy.getUserByEmailAndPassword(email, password);
+	@GetMapping("search-customer/{id}")
+	public Customer searchCustomerById(@PathVariable String id) {
+		return dataServiceProxy.searchCustomerById(id);
 	}
 
 }
