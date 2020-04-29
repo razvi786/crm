@@ -1,5 +1,7 @@
 package com.cts.crm.service.proxy;
 
+import java.util.List;
+
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cts.crm.model.Customer;
+import com.cts.crm.model.Subscription;
 import com.cts.crm.model.User;
 
 @FeignClient(name="data-service")
@@ -24,6 +27,12 @@ public interface DataServiceProxy {
 	public Customer createCustomer(@RequestBody Customer customer);
 	
 	@GetMapping("search-customer/{id}")
-	public Customer searchCustomerById(@PathVariable String id);
+	public Customer searchCustomerById(@PathVariable int id);
+	
+	@GetMapping("view-active-subscriptions/{customerId}")
+	public List<Subscription> viewActiveSubscriptions(@PathVariable int customerId);
+	
+	@PostMapping("create-subscription")
+	public Subscription createSubscription(@RequestBody Subscription subscription);
  
 }

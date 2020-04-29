@@ -6,6 +6,6 @@ public interface CustomerService {
 	
 	public Customer createCustomer(Customer customer);
 	
-	public Customer searchCustomerById(String id);
+	public Customer searchCustomerById(int id);
 
 }

@@ -20,8 +20,8 @@ public class CustomerServiceImpl implements CustomerService{
 	}
 
 	@Override
-	public Customer searchCustomerById(String id) {
-		Optional<Customer> c=customerRepo.findByCustomerIdContaining(id);
+	public Customer searchCustomerById(int id) {
+		Optional<Customer> c=customerRepo.findById(id);
 		Customer customer=c.orElse(null);
 		return customer;
 	}

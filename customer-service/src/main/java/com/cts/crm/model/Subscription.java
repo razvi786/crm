@@ -19,8 +19,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name="subscription")
 public class Subscription implements Serializable{
 	private static final long serialVersionUID = -1491107162638602202L;
 	@Id
@@ -29,7 +27,5 @@ public class Subscription implements Serializable{
 	private String name;
 	private String expiryDate;
 	private boolean active;
-	@ManyToOne
-	@JoinColumn(name="customerId")
-	private Customer customerId;	
+	private int customerId;	
 }
