@@ -14,7 +14,7 @@ import com.cts.crm.service.proxy.DataServiceProxy;
 public class UserRestController {
 	
 	@Autowired 
-	private DataServiceProxy userServiceProxy;
+	DataServiceProxy userServiceProxy;
 	
 	@PostMapping("create-user")
 	public User createUser(@RequestBody User user) {
