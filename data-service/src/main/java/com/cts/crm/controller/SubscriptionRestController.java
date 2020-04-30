@@ -1,5 +1,6 @@
 package com.cts.crm.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,11 @@ public class SubscriptionRestController {
 	@PostMapping("create-subscription")
 	public Subscription createSubscription(@RequestBody Subscription subscription) {
 		return subscriptionService.createSubscription(subscription);
+	}
+	
+	@GetMapping("get-today-subscriptions")
+	public List<Subscription> getAllSubscriptionsOfToday(){
+		return subscriptionService.getAllSubscriptionsOfToday();
 	}
 	
 }

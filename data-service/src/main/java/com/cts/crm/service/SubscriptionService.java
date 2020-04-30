@@ -11,5 +11,7 @@ public interface SubscriptionService {
 	public void inactiveSubscription(int id);
 	
 	public Subscription createSubscription(Subscription subscription);
+	
+	public List<Subscription> getAllSubscriptionsOfToday();
 
 }

@@ -1,5 +1,6 @@
 package com.cts.crm.repo;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,5 +19,8 @@ public interface SubscriptionRepo extends JpaRepository<Subscription, Integer> {
 	@Modifying
 	@Query("UPDATE Subscription sub SET sub.active=FALSE WHERE sub.id=?1")
 	public void inactiveSubscription(int id);
+	
+	@Query("FROM Subscription sub WHERE sub.expiryDate=CURRENT_DATE()")
+	public List<Subscription> findAllSubscriptionsOfToday();
 
 }

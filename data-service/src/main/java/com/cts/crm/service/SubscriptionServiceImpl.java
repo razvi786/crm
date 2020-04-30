@@ -29,4 +29,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		return subscriptionRepo.save(subscription);
 	}
 
+	@Override
+	public List<Subscription> getAllSubscriptionsOfToday() {
+		return subscriptionRepo.findAllSubscriptionsOfToday();
+	}
+
 }

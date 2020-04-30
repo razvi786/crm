@@ -1,8 +1,6 @@
 package com.cts.crm.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.sql.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,12 +13,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class User {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+public class Subscription{
 	private int id;
 	private String name;
-	private String email;
-	private String password;
-	private String userType;
+	private Date expiryDate;
+	private boolean active;
+	private Customer customerId;	
 }
