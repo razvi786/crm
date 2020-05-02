@@ -15,6 +15,8 @@ import com.cts.crm.model.User;
 
 @FeignClient(name="data-service")
 @RibbonClient(name="data-service")
+//@FeignClient(name="netfilx-zuul-api-gateway")
+//@RibbonClient(name="netfilx-zuul-api-gateway")
 public interface DataServiceProxy {
 	
 	@PostMapping("create-user")
