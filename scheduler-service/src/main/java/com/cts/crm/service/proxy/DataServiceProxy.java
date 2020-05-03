@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.cloud.netflix.ribbon.RibbonClient;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cts.crm.model.Subscription;
 
@@ -13,10 +15,10 @@ import com.cts.crm.model.Subscription;
 @RibbonClient(name="data-service")
 public interface DataServiceProxy {
 	
-	@GetMapping("inactive-subscription/{id}")
-	public void inactiveSubscription(@PathVariable int id);
+	@PostMapping("inactive-subscription/batch")
+	public ResponseEntity<Object> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions);
 	
-	@GetMapping("get-today-subscriptions")
-	public List<Subscription> getAllSubscriptionsOfToday();
+	@GetMapping("get-all-subscriptions")
+	public ResponseEntity<List<Subscription>> getAllSubscriptions();
 
 }

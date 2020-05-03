@@ -1,6 +1,7 @@
 package com.cts.crm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,12 +18,12 @@ public class UserRestController {
 	DataServiceProxy userServiceProxy;
 	
 	@PostMapping("create-user")
-	public User createUser(@RequestBody User user) {
+	public ResponseEntity<User> createUser(@RequestBody User user) {
 		return userServiceProxy.createUser(user);
 	}
 	
 	@GetMapping("get-user/{email}/{password}")
-	public User getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+	public ResponseEntity<User> getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
 		return userServiceProxy.getUserByEmailAndPassword(email, password);
 	}
 
