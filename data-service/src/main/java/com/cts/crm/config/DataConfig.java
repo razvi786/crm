@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Configuration
 @Data
-public class PropertiesConfig {
+public class DataConfig {
 	
 	@Value("${subscription.update.query}")
 	String subscriptionUpdateQuery;

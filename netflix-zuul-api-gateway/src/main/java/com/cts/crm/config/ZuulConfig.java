@@ -19,7 +19,7 @@ public class ZuulConfig {
 	@Value("${spring.gateway.password}")
 	private String password;
 	
-	@Value("${spring.gateway.role}")
+	@Value("#{'${spring.gateway.role}'.split(',')}")
 	private List<String> roles;
 
 }

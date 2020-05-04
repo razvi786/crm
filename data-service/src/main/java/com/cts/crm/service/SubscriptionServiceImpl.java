@@ -1,18 +1,15 @@
 package com.cts.crm.service;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.cts.crm.config.PropertiesConfig;
+import com.cts.crm.config.DataConfig;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.repo.SubscriptionRepo;
 
@@ -27,7 +24,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	PropertiesConfig properties;
+	DataConfig properties;
 	
 	@Override
 	public Subscription getSubscriptionById(int id) {
@@ -92,6 +89,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 //			}
 //			
 //		};
+		
+		//Using Lambda and Streams
 		ParameterizedPreparedStatementSetter<Subscription> parameterizedPreparedStatementSetter = (ps,sub) -> {ps.setInt(1, sub.getId());};
 		jdbcTemplate.batchUpdate(query, subscriptions, batchSize, parameterizedPreparedStatementSetter);
 		

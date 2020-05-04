@@ -13,24 +13,32 @@ import com.cts.crm.exception.CustomerNotFoundException;
 import com.cts.crm.model.Customer;
 import com.cts.crm.service.CustomerService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class CustomerRestController {
 	
 	@Autowired
 	CustomerService customerService;
 	
-	@PostMapping("create-customer")
+	@PostMapping("customers")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 		Customer createdCustomer = customerService.createCustomer(customer);
 		return new ResponseEntity<Customer>(createdCustomer,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("search-customer/{id}")
+	@GetMapping("customers/{id}")
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable int id) {
 		Customer customer = customerService.searchCustomerById(id);
-		if(customer==null)
-			throw new CustomerNotFoundException("id: "+id+" not found");
-		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+		try {
+			if(customer==null)
+				throw new CustomerNotFoundException("id: "+id+" not found");
+			return new ResponseEntity<Customer>(customer,HttpStatus.OK);
+		}catch(CustomerNotFoundException ex) {
+			log.info("Customer Not Found: {}",ex.getMessage());
+			return new ResponseEntity<Customer>(customer,HttpStatus.NOT_FOUND);
+		}
 	}
 
 }

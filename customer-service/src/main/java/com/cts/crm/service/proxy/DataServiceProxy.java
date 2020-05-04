@@ -16,26 +16,24 @@ import com.cts.crm.model.User;
 
 @FeignClient(name="data-service")
 @RibbonClient(name="data-service")
-//@FeignClient(name="netfilx-zuul-api-gateway")
-//@RibbonClient(name="netfilx-zuul-api-gateway")
 public interface DataServiceProxy {
 	
-	@PostMapping("create-user")
+	@PostMapping("users")
 	public ResponseEntity<User> createUser(@RequestBody User user);
 	
-	@GetMapping("get-user/{email}/{password}")
+	@GetMapping("users/{email}/{password}")
 	public ResponseEntity<User> getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password);
 	
-	@PostMapping("create-customer")
+	@PostMapping("customers")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer);
 	
-	@GetMapping("search-customer/{id}")
+	@GetMapping("customers/{id}")
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable int id);
 	
-	@GetMapping("view-active-subscriptions/{customerId}")
+	@GetMapping("customers/{customerId}/subscriptions/active")
 	public ResponseEntity<List<Subscription>> viewActiveSubscriptions(@PathVariable int customerId);
 	
-	@PostMapping("create-subscription")
+	@PostMapping("subscriptions")
 	public ResponseEntity<Subscription> createSubscription(@RequestBody Subscription subscription);
  
 }

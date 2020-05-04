@@ -17,12 +17,12 @@ public class CustomerRestController {
 	@Autowired
 	DataServiceProxy dataServiceProxy;
 	
-	@PostMapping("create-customer")
+	@PostMapping("customers")
 	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
 		return dataServiceProxy.createCustomer(customer);
 	}
 	
-	@GetMapping("search-customer/{id}")
+	@GetMapping("customers/{id}")
 	public ResponseEntity<Customer> searchCustomerById(@PathVariable int id) {
 		return dataServiceProxy.searchCustomerById(id);
 	}

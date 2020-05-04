@@ -19,12 +19,12 @@ public class SubscriptionRestController {
 	@Autowired
 	DataServiceProxy dataServiceProxy;
 	
-	@GetMapping("view-active-subscriptions/{customerId}")
-	public ResponseEntity<List<Subscription>> viewActiveSubscriptions(@PathVariable int customerId){
+	@GetMapping("customers/{customerId}/subscriptions/active")
+	public ResponseEntity<List<Subscription>> viewActiveSubscriptions(@PathVariable int customerId) {
 		return dataServiceProxy.viewActiveSubscriptions(customerId);
 	}
 	
-	@PostMapping("create-subscription")
+	@PostMapping("subscriptions")
 	public ResponseEntity<Subscription> createSubscription(@RequestBody Subscription subscription) {
 		return dataServiceProxy.createSubscription(subscription);
 	}

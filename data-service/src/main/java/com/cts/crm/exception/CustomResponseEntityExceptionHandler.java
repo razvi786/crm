@@ -12,29 +12,23 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @RestController
 @ControllerAdvice
-public class CRMResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
+public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request){
-		CRMExceptionResponse crmExceptionResponse = new CRMExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		CustomExceptionResponse crmExceptionResponse = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(crmExceptionResponse,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
-		CRMExceptionResponse crmExceptionResponse = new CRMExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		CustomExceptionResponse crmExceptionResponse = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<Object>(crmExceptionResponse, HttpStatus.NOT_FOUND);
 	}
 	
 	@ExceptionHandler(CustomerNotFoundException.class)
 	public final ResponseEntity<Object> handleCustomerNotFoundException(Exception ex, WebRequest request){
-		CRMExceptionResponse crmExceptionResponse = new CRMExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(crmExceptionResponse,HttpStatus.NOT_FOUND);
-	}
-	
-	@ExceptionHandler(SubscriptionNotFoundException.class)
-	public final ResponseEntity<Object> handleSubscriptionNotFoundException(Exception ex, WebRequest request){
-		CRMExceptionResponse crmExceptionResponse = new CRMExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
+		CustomExceptionResponse crmExceptionResponse = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
 		return new ResponseEntity<Object>(crmExceptionResponse,HttpStatus.NOT_FOUND);
 	}
 	

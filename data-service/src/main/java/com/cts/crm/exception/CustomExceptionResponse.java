@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CRMExceptionResponse {
+public class CustomExceptionResponse {
 	
 	private Date timestamp;
 	private String message;
