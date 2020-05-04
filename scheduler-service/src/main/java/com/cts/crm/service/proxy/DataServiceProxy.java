@@ -15,10 +15,10 @@ import com.cts.crm.model.Subscription;
 @RibbonClient(name="data-service")
 public interface DataServiceProxy {
 	
-	@PostMapping("inactive-subscription/batch")
+	@PostMapping("subscriptions/batch-inactive")
 	public ResponseEntity<Object> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions);
 	
-	@GetMapping("get-all-subscriptions")
+	@GetMapping("subscriptions")
 	public ResponseEntity<List<Subscription>> getAllSubscriptions();
 
 }

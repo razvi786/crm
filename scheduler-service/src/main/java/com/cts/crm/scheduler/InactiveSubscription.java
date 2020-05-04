@@ -12,7 +12,7 @@ public class InactiveSubscription {
 	@Autowired
 	SchedulerService schedulerService;
 	
-	@Scheduled(cron = "0 5 0 * * ?")//${}
+	@Scheduled(cron = "${scheduler.inactive.cron}")
 //	@Scheduled(fixedRate = 10000)
 	public void inactiveSubscription() {
 		schedulerService.inactiveSubscription();

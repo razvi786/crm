@@ -17,12 +17,12 @@ public class UserRestController {
 	@Autowired 
 	DataServiceProxy userServiceProxy;
 	
-	@PostMapping("create-user")
+	@PostMapping("users")
 	public ResponseEntity<User> createUser(@RequestBody User user) {
 		return userServiceProxy.createUser(user);
 	}
 	
-	@GetMapping("get-user/{email}/{password}")
+	@GetMapping("users/{email}/{password}")
 	public ResponseEntity<User> getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
 		return userServiceProxy.getUserByEmailAndPassword(email, password);
 	}

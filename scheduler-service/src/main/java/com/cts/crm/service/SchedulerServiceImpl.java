@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.service.proxy.DataServiceProxy;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class SchedulerServiceImpl implements SchedulerService {
 	
@@ -26,7 +23,7 @@ public class SchedulerServiceImpl implements SchedulerService {
 				.toLocalDate().equals(LocalDate.now()))
 				.collect(Collectors.toList());
 		dataServiceProxy.batchInactiveSubscriptions(todaySubscriptions);
-		todaySubscriptions.forEach((sub)->log.info("Subscription: {} is now inactive", sub.getId()));
+//		todaySubscriptions.forEach((sub)->log.info("Subscription: {} is now inactive", sub.getId()));
 	}
 
 }
