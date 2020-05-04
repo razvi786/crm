@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.crm.config.PropertiesConfig;
 import com.cts.crm.exception.UserNotFoundException;
 import com.cts.crm.model.User;
 import com.cts.crm.service.UserService;
@@ -32,5 +33,5 @@ public class UserRestController {
 			throw new UserNotFoundException("user with Email:"+email+" and Password:"+password+" not found");
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
-
+	
 }
