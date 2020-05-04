@@ -12,6 +12,7 @@ import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.cts.crm.config.PropertiesConfig;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.repo.SubscriptionRepo;
 
@@ -24,6 +25,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	
 	@Autowired
 	JdbcTemplate jdbcTemplate;
+	
+	@Autowired
+	PropertiesConfig properties;
 	
 	@Override
 	public Subscription getSubscriptionById(int id) {
@@ -61,7 +65,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public void batchInactiveSubscription(List<Subscription> subscriptions) {
 
-		String query="UPDATE Subscription sub SET sub.active=FALSE WHERE sub.id=?";
+		String query=properties.getSubscriptionUpdateQuery();
 		
 		//Without Batch Size
 //		BatchPreparedStatementSetter batchPreparedStatementSetter = new BatchPreparedStatementSetter() {
