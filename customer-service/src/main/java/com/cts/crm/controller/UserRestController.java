@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.crm.model.User;
-import com.cts.crm.service.proxy.DataServiceProxy;
+//import com.cts.crm.service.proxy.DataServiceProxy;
+import com.cts.crm.service.proxy.DataServiceRestTemplate;
 
 @RestController
 public class UserRestController {
 	
-	@Autowired 
+	/*@Autowired 
 	DataServiceProxy userServiceProxy;
 	
 	@PostMapping("users")
@@ -24,6 +25,18 @@ public class UserRestController {
 	
 	@GetMapping("users/{email}/{password}")
 	public ResponseEntity<User> getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
+		return userServiceProxy.getUserByEmailAndPassword(email, password);
+	}*/
+	@Autowired 
+	DataServiceRestTemplate userServiceProxy;
+	
+	@PostMapping("users")
+	public User createUser(@RequestBody User user) {
+		return userServiceProxy.createUser(user);
+	}
+	
+	@GetMapping("users/{email}/{password}")
+	public User getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
 		return userServiceProxy.getUserByEmailAndPassword(email, password);
 	}
 

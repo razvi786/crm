@@ -1,4 +1,4 @@
-package com.cts.crm.service.proxy;
+/*package com.cts.crm.service.proxy;
 
 import java.util.List;
 
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+
 import com.cts.crm.model.Customer;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.model.User;
@@ -17,6 +18,7 @@ import com.cts.crm.model.User;
 @FeignClient(name="data-service")
 @RibbonClient(name="data-service")
 public interface DataServiceProxy {
+   
 	
 	@PostMapping("users")
 	public ResponseEntity<User> createUser(@RequestBody User user);
@@ -35,5 +37,6 @@ public interface DataServiceProxy {
 	
 	@PostMapping("subscriptions")
 	public ResponseEntity<Subscription> createSubscription(@RequestBody Subscription subscription);
+    
  
-}
+}*/
