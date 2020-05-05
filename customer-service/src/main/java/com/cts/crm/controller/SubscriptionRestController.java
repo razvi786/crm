@@ -11,12 +11,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.crm.model.Subscription;
-import com.cts.crm.service.proxy.DataServiceProxy;
+//import com.cts.crm.service.proxy.DataServiceProxy;
+import com.cts.crm.service.proxy.DataServiceRestTemplate;
 
 @RestController
 public class SubscriptionRestController {
 	
-	@Autowired
+	/*@Autowired
 	DataServiceProxy dataServiceProxy;
 	
 	@GetMapping("customers/{customerId}/subscriptions/active")
@@ -26,6 +27,18 @@ public class SubscriptionRestController {
 	
 	@PostMapping("subscriptions")
 	public ResponseEntity<Subscription> createSubscription(@RequestBody Subscription subscription) {
+		return dataServiceProxy.createSubscription(subscription);
+	}*/
+	@Autowired
+	DataServiceRestTemplate dataServiceProxy;
+	
+	@GetMapping("customers/{customerId}/subscriptions/active")
+	public Subscription viewActiveSubscriptions(@PathVariable int customerId) {
+		return dataServiceProxy.viewActiveSubscriptions(customerId);
+	}
+	
+	@PostMapping("subscriptions")
+	public Subscription createSubscription(@RequestBody Subscription subscription) {
 		return dataServiceProxy.createSubscription(subscription);
 	}
 	

@@ -12,7 +12,8 @@ public class InactiveSubscription {
 	@Autowired
 	SchedulerService schedulerService;
 	
-	@Scheduled(cron = "${scheduler.inactive.cron}")
+	//@Scheduled(cron="${cron.expression}")
+	@Scheduled(cron = "0 5 0 * * ?")
 //	@Scheduled(fixedRate = 10000)
 	public void inactiveSubscription() {
 		schedulerService.inactiveSubscription();
