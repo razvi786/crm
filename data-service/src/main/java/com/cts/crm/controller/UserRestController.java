@@ -35,7 +35,7 @@ public class UserRestController {
 			if(user==null)
 				throw new UserNotFoundException("user with Email:"+email+" and Password:"+password+" not found");
 			return new ResponseEntity<User>(user,HttpStatus.OK);
-		}catch(UserNotFoundException ex) {
+		} catch(UserNotFoundException ex) {
 			log.info("User Not Found: {}",ex.getMessage());
 			return new ResponseEntity<User>(user,HttpStatus.NOT_FOUND);
 		}
