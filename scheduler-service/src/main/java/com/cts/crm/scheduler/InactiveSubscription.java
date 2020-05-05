@@ -15,6 +15,7 @@ public class InactiveSubscription {
 	//@Scheduled(cron="${cron.expression}")
 	@Scheduled(cron = "0 5 0 * * ?")
 //	@Scheduled(fixedRate = 10000)
+//	@Scheduled(cron = "0 5 0 * * ?")
 	public void inactiveSubscription() {
 		schedulerService.inactiveSubscription();
 	}
