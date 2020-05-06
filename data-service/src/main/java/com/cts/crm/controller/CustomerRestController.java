@@ -1,12 +1,19 @@
 package com.cts.crm.controller;
 
+import java.text.NumberFormat;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cts.crm.exception.CustomerNotFoundException;
 import com.cts.crm.model.Customer;
 import com.cts.crm.service.CustomerService;
 
@@ -16,14 +23,18 @@ public class CustomerRestController {
 	@Autowired
 	CustomerService customerService;
 	
-	@PostMapping("create-customer")
-	public Customer createCustomer(@RequestBody Customer customer) {
-		return customerService.createCustomer(customer);
+	@PostMapping("customers")
+	public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+		Customer createdCustomer = customerService.createCustomer(customer);
+		return new ResponseEntity<Customer>(createdCustomer,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("search-customer/{id}")
-	public Customer searchCustomerById(@PathVariable int id) {
-		return customerService.searchCustomerById(id);
+	@GetMapping("customers/{id}")
+	public ResponseEntity<Customer> searchCustomerById(@PathVariable int id) {
+		Customer customer = customerService.searchCustomerById(id);
+		if(customer==null)
+			throw new CustomerNotFoundException("id: "+id+" not found");
+		return new ResponseEntity<Customer>(customer,HttpStatus.OK);
 	}
 
 }

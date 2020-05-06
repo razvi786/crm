@@ -3,6 +3,8 @@ package com.cts.crm.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,19 +20,34 @@ public class SubscriptionRestController {
 	@Autowired
 	SubscriptionService subscriptionService;
 	
-	@GetMapping("view-active-subscriptions/{customerId}")
-	public List<Subscription> viewActiveSubscriptions(@PathVariable int customerId){
-		return subscriptionService.viewActiveSubscriptions(customerId);
-	}
-
-	@GetMapping("inactive-subscription/{id}")
-	public void inactiveSubscription(@PathVariable int id) {
-		subscriptionService.inactiveSubscription(id);
+	@GetMapping("customers/{customerId}/subscriptions/active")
+	public ResponseEntity<List<Subscription>> viewActiveSubscriptions(@PathVariable int customerId){
+		List<Subscription> subscriptions = subscriptionService.viewActiveSubscriptions(customerId);
+		return new ResponseEntity<List<Subscription>>(subscriptions,HttpStatus.OK);
 	}
 	
-	@PostMapping("create-subscription")
-	public Subscription createSubscription(@RequestBody Subscription subscription) {
-		return subscriptionService.createSubscription(subscription);
+	@PostMapping("subscriptions/batch-inactive")
+	public ResponseEntity<Object> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions) {
+		subscriptionService.batchInactiveSubscription(subscriptions);
+		return new ResponseEntity<Object>(HttpStatus.OK);
+	}
+	
+	@GetMapping("subscriptions")
+	public ResponseEntity<List<Subscription>> getAllSubscriptions(){
+		List<Subscription> subscriptions = subscriptionService.getAllSubscriptions();
+		return new ResponseEntity<List<Subscription>>(subscriptions,HttpStatus.OK);
+	}
+	
+	@PostMapping("subscriptions")
+	public ResponseEntity<Subscription> createSubscription(@RequestBody Subscription subscription) {
+		Subscription createdSubscription = subscriptionService.createSubscription(subscription);
+		return new ResponseEntity<Subscription>(createdSubscription,HttpStatus.CREATED);
+	}
+	
+	@GetMapping("subscriptions/today")
+	public ResponseEntity<List<Subscription>> getAllSubscriptionsOfToday(){
+		List<Subscription> subscriptions = subscriptionService.getAllSubscriptionsOfToday();
+		return new ResponseEntity<List<Subscription>>(subscriptions, HttpStatus.OK);
 	}
 	
 }

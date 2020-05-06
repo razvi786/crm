@@ -8,6 +8,7 @@ import com.cts.crm.model.User;
 
 public interface UserRepo extends JpaRepository<User,Integer>{
 	
+//	@Query("FROM User user WHERE email=?1 AND password=?2")
 	public Optional<User> findByEmailAndPassword(String email,String password);
 
 }
