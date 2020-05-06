@@ -9,7 +9,7 @@ import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
-import com.cts.crm.config.DataConfig;
+import com.cts.crm.config.DataServiceConfig;
 import com.cts.crm.model.Subscription;
 import com.cts.crm.repo.SubscriptionRepo;
 
@@ -24,7 +24,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	JdbcTemplate jdbcTemplate;
 	
 	@Autowired
-	DataConfig properties;
+	DataServiceConfig properties;
 	
 	@Override
 	public Subscription getSubscriptionById(int id) {

@@ -2,7 +2,9 @@ package com.cts.crm.filter;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
@@ -22,7 +24,7 @@ public class ZuulLoggingFilter extends ZuulFilter{
 	@Override
 	public Object run() throws ZuulException {
 		HttpServletRequest request = RequestContext.getCurrentContext().getRequest();
-		log.info("Request URI -> {}",request.getRequestURI());
+		log.info("Request URI -> {} ",request.getRequestURI());
 		return request;
 	}
 

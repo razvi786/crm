@@ -8,23 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cts.crm.model.Subscription;
-//import com.cts.crm.service.proxy.DataServiceRestTemplate;
-import com.cts.crm.service.proxy.DataServiceProxy;
+import com.cts.crm.service.proxy.DataServiceRestTemplate;
 
 @Service
 public class SchedulerServiceImpl implements SchedulerService {
 	
 	@Autowired
-	DataServiceProxy dataServiceProxy;
+	DataServiceRestTemplate dataServiceRestTemplate;
 
 	@Override
 	public void inactiveSubscription() {
-		List<Subscription> subscriptions=dataServiceProxy.getAllSubscriptions().getBody();
+		List<Subscription> subscriptions=dataServiceRestTemplate.getAllSubscriptions().getBody();
 		List<Subscription> todaySubscriptions = subscriptions.parallelStream().filter((sub)->sub.getExpiryDate()
 				.toLocalDate().equals(LocalDate.now()))
 				.collect(Collectors.toList());
-		dataServiceProxy.batchInactiveSubscriptions(todaySubscriptions);
+		dataServiceRestTemplate.batchInactiveSubscriptions(todaySubscriptions);
 //		todaySubscriptions.forEach((sub)->log.info("Subscription: {} is now inactive", sub.getId()));
 	}
-
+	
 }
