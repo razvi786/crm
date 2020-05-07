@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.crm.model.Subscription;
-import com.cts.crm.service.proxy.DataServiceRestTemplate;
+import com.cts.crm.service.rest.DataServiceRestTemplate;
 
 @RestController
 public class SubscriptionRestController {

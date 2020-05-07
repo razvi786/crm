@@ -13,10 +13,7 @@ import com.cts.crm.exception.UserNotFoundException;
 import com.cts.crm.model.User;
 import com.cts.crm.service.UserService;
 
-import lombok.extern.slf4j.Slf4j;
-
 @RestController
-@Slf4j
 public class UserRestController {
 	
 	@Autowired
@@ -31,14 +28,9 @@ public class UserRestController {
 	@GetMapping("users/{email}/{password}")
 	public ResponseEntity<User> getUserByEmailAndPassword(@PathVariable String email, @PathVariable String password) {
 		User user = userService.getUserByEmailAndPassword(email, password);
-		try {
-			if(user==null)
-				throw new UserNotFoundException("user with Email:"+email+" and Password:"+password+" not found");
-			return new ResponseEntity<User>(user,HttpStatus.OK);
-		} catch(UserNotFoundException ex) {
-			log.info("User Not Found: {}",ex.getMessage());
-			return new ResponseEntity<User>(user,HttpStatus.NOT_FOUND);
-		}
+		if(user==null)
+			throw new UserNotFoundException("user with Email:"+email+" and Password:"+password+" not found");
+		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 	
 }

@@ -23,7 +23,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
+		
       http.csrf().disable()
+      	.headers().httpStrictTransportSecurity().disable()
+      	.and()
       	.authorizeRequests()
       	.antMatchers("cloudfoundryapplication/**").permitAll()
       	.anyRequest().authenticated()
@@ -31,6 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .httpBasic()
         .authenticationEntryPoint(entryPoint);
+        
       
     }
 	
@@ -39,7 +43,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		auth.inMemoryAuthentication()
 		.withUser(properties.getUsername())
 		.password(encoder.encode(properties.getPassword()))
-		.roles(properties.getRoles().get(0),properties.getRoles().get(1));
+		.roles(properties.getRoles());
 	}
 	
 }

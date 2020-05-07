@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cts.crm.model.User;
-import com.cts.crm.service.proxy.DataServiceRestTemplate;
+import com.cts.crm.service.rest.DataServiceRestTemplate;
 
 @RestController
 public class UserRestController {

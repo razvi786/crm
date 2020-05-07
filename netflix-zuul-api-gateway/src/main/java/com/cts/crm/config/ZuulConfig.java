@@ -1,7 +1,5 @@
 package com.cts.crm.config;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
@@ -19,7 +17,7 @@ public class ZuulConfig {
 	@Value("${spring.gateway.password}")
 	private String password;
 	
-	@Value("#{'${spring.gateway.role}'.split(',')}")
-	private List<String> roles;
+	@Value("$spring.gateway.role}")
+	private String[] roles;
 
 }

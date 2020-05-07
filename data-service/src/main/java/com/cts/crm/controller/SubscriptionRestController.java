@@ -27,9 +27,9 @@ public class SubscriptionRestController {
 	}
 	
 	@PostMapping("subscriptions/batch-inactive")
-	public ResponseEntity<Object> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions) {
+	public ResponseEntity<String> batchInactiveSubscriptions(@RequestBody List<Subscription> subscriptions) {
 		subscriptionService.batchInactiveSubscription(subscriptions);
-		return new ResponseEntity<Object>(HttpStatus.OK);
+		return new ResponseEntity<String>("Today's Subscriptions are now Inactive.", HttpStatus.OK);
 	}
 	
 	@GetMapping("subscriptions")
