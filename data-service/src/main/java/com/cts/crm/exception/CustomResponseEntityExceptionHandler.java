@@ -2,10 +2,12 @@ package com.cts.crm.exception;
 
 import java.util.Date;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,19 +25,19 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ExceptionHandler(Exception.class)
 	public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
 	
 	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public final ResponseEntity<Object> handleMethodArgumentTypeMismatchException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
 	
 	@ExceptionHandler(UserNotFoundException.class)
 	public final ResponseEntity<Object> handleUserNotFoundException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Object>(response, HttpStatus.OK);
 	}
 	
 	@ExceptionHandler(CustomerNotFoundException.class)
@@ -47,15 +49,27 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ExceptionHandler(IncorrectResultSizeDataAccessException.class)
 	public final ResponseEntity<Object> handleIncorrectResultSizeDataAccessException(Exception ex, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "No user found with given Username and Password", request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.NOT_FOUND);
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(EmptyResultDataAccessException.class)
+	public final ResponseEntity<Object> handleEmptyResultDataAccessException(Exception ex, WebRequest request){
+		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "No user found with given Username and Password", request.getDescription(false));
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
 	
 	//Handling Already Handled Exceptions
 	
 	@Override
+	public final ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
+		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), "U Need to pass the Body with POST Method", request.getDescription(false));
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
+	}
+	
+	@Override
 	protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(HttpRequestMethodNotSupportedException ex, HttpHeaders headers, HttpStatus status, WebRequest request){
 		CustomExceptionResponse response = new CustomExceptionResponse(new Date(), ex.getMessage(), request.getDescription(false));
-		return new ResponseEntity<Object>(response,HttpStatus.METHOD_NOT_ALLOWED);
+		return new ResponseEntity<Object>(response,HttpStatus.OK);
 	}
 	
 }

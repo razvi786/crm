@@ -39,11 +39,11 @@ public class SubscriptionRestController {
 	
 	//	Hystrix Fallback Methods	
 	public  ResponseEntity<List<Subscription>> getFallbackSubscription(@PathVariable int customerId){
-		Subscription response = new Subscription(0, "Server is currently down.", null, false, null);
+		Subscription response = new Subscription(0, "Server is currently down", null, false, null);
 		return new ResponseEntity<List<Subscription>>(new ArrayList<>(Arrays.asList(response)),HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	public  ResponseEntity<Subscription> postFallbackSubscription(@RequestBody Subscription subscription){
-		Subscription response = new Subscription(0, "Server is currently down.", null, false, null);
+		Subscription response = new Subscription(0, "Server is currently down", null, false, null);
 		return new ResponseEntity<Subscription>(response,HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	

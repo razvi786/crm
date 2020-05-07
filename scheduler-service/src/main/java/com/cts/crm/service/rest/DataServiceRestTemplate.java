@@ -3,7 +3,6 @@ package com.cts.crm.service.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -18,7 +17,6 @@ import com.cts.crm.model.Subscription;
 public class DataServiceRestTemplate {
 	
 	@Autowired
-	@LoadBalanced
 	RestTemplate restTemplate;
 	
 	@Autowired

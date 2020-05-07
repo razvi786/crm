@@ -24,7 +24,11 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User createUser(User user) {
-		return userJpaRepo.save(user);
+		if(properties.getJpaEnable().equalsIgnoreCase("Y")) {
+			return userJpaRepo.save(user);
+		}else {
+			return userJdbcRepo.save(user);
+		}
 	}
 
 	@Override

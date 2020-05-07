@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpClientErrorException;
 
 import com.cts.crm.exception.CustomerNotFoundException;
 import com.cts.crm.model.Customer;
@@ -38,12 +39,10 @@ public class CustomerRestController {
 	
 	//	Hystrix Fallback Methods	
 	public  ResponseEntity<Customer> postFallbackCustomer(@RequestBody Customer customer){
-		Customer response=new Customer(0,"Server is Currently Down","","","","");
-		return new ResponseEntity<Customer>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,"Customer could not be created. Please try again later");
 	}
 	public  ResponseEntity<Customer> getFallbackCustomer(@PathVariable Integer id){
-		Customer response=new Customer(0,"Server is Currently Down","","","","");
-		return new ResponseEntity<Customer>(response,HttpStatus.INTERNAL_SERVER_ERROR);
+		throw new HttpClientErrorException(HttpStatus.INTERNAL_SERVER_ERROR,"Customer "+id+" Not Found. Please try again later");
 	}
 	
 
