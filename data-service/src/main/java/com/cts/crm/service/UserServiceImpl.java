@@ -5,25 +5,38 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cts.crm.config.DataServiceConfig;
 import com.cts.crm.model.User;
-import com.cts.crm.repo.UserRepo;
+import com.cts.crm.repo.UserJdbcRepo;
+import com.cts.crm.repo.UserJpaRepo;
 
 @Service
 public class UserServiceImpl implements UserService{
 	
 	@Autowired
-	UserRepo userRepo;
+	DataServiceConfig properties;
+	
+	@Autowired
+	UserJpaRepo userJpaRepo;
+	
+	@Autowired
+	UserJdbcRepo userJdbcRepo;
 
 	@Override
 	public User createUser(User user) {
-		return userRepo.save(user);
+		return userJpaRepo.save(user);
 	}
 
 	@Override
 	public User getUserByEmailAndPassword(String email, String password) {
-		Optional<User> u=userRepo.findByEmailAndPassword(email, password);
-		User user=u.orElse(null);
-		return user;
+		if(properties.getJpaEnable().equalsIgnoreCase("Y")) {
+			Optional<User> u=userJpaRepo.findByEmailAndPassword(email, password);
+			User user=u.orElse(null);
+			return user;
+		}else {
+			return userJdbcRepo.findByEmailAndPassword(email, password);
+		}
+		
 	}
 
 }

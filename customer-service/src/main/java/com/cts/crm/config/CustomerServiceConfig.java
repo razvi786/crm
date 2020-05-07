@@ -1,8 +1,8 @@
 package com.cts.crm.config;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -14,6 +14,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 @Data
+@RefreshScope
 public class CustomerServiceConfig {
 	
 	//Properties
@@ -23,14 +24,30 @@ public class CustomerServiceConfig {
 	@Value("${spring.security.password}")
 	private String password;
 	
-	@Value("#{'${spring.security.role}'.split(',')}")
-	private List<String> roles;
+	@Value("$spring.security.role}")
+	private String[] roles;
 	
-	@Value("${spring.headers.authorization}")
-	private String authorizationHeader;
+	@Value("${rest.customer.get}")
+	private String getCustomer;
+	
+	@Value("${rest.customer.post}")
+	private String postCustomer;
+	
+	@Value("${rest.user.get}")
+	private String getUser;
+	
+	@Value("${rest.user.post}")
+	private String postUser;
+	
+	@Value("${rest.subscription.get}")
+	private String getSubscription;
+	
+	@Value("${rest.subscription.post}")
+	private String postSubscription;
 	
 	//Rest Template Configuration
 	@Bean
+	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}

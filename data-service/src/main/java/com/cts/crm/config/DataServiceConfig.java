@@ -1,8 +1,7 @@
 package com.cts.crm.config;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +12,7 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 @Data
+@RefreshScope
 public class DataServiceConfig {
 	
 	//Properties
@@ -25,8 +25,11 @@ public class DataServiceConfig {
 	@Value("${spring.security.password}")
 	private String password;
 	
-	@Value("#{'${spring.security.role}'.split(',')}")
-	private List<String> roles;
+	@Value("$spring.security.role}")
+	private String[] roles;
+	
+	@Value("${queries.jpa.enable}")
+	private String jpaEnable;
 	
 	//Swagger2 Configurations
 	@Bean

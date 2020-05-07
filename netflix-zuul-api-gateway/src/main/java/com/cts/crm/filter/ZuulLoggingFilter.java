@@ -2,9 +2,7 @@ package com.cts.crm.filter;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
